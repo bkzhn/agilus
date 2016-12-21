@@ -9,6 +9,7 @@ class AgilusTestCase(unittest.TestCase):
     def test_homepage(self):
         response = self.app.get('/')
         assert b'Agilus' in response.data
+        assert response.status_code == 200
 
 if __name__ == '__main__':
     unittest.main()
