@@ -44,7 +44,6 @@ class Ticket(db.Model):
     author = db.Column(db.Integer, ForeignKey('user.id'), nullable=False)
     assignee = db.Column(db.Integer, ForeignKey('user.id'), nullable=True)
 
-
     def __init__(self, title, description, type_id, status_id, author, assignee=None):
         self.title = title
         self.description = description
@@ -55,3 +54,14 @@ class Ticket(db.Model):
 
     def __repr__(self):
         return '<Ticket %r>' % self.title
+
+    @property
+    def serialize(self):
+        return {
+            'title': self.title,
+            'description': self.description,
+            'type_id': self.type_id,
+            'status_id': self.status_id,
+            'author': self.author,
+            'assignee': self.assignee
+        }
