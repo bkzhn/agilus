@@ -23,5 +23,12 @@ def tickets():
     })
 
 
+@app.route('/ticket/<id>')
+def ticket(id):
+    from models import Ticket
+    ticket = Ticket.query.get_or_404(id)
+    return jsonify(ticket.serialize)
+
+
 if __name__ == '__main__':
     app.run()
