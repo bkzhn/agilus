@@ -11,5 +11,9 @@ class AgilusTestCase(unittest.TestCase):
         assert b'Agilus' in response.data
         assert response.status_code == 200
 
+    def test_ticket(self):
+        response = self.app.get('/ticket')
+        assert response.status_code == 404
+
 if __name__ == '__main__':
     unittest.main()
