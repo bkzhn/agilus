@@ -21,5 +21,8 @@ class AgilusTestCase(unittest.TestCase):
         response = self.app.get('/ticket/1')
         assert response.status_code == 200
 
+        response = self.app.post('ticket/1')
+        assert response.status_code == 405
+
 if __name__ == '__main__':
     unittest.main()
