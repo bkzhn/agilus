@@ -1,5 +1,6 @@
+"""Main."""
+
 from flask import Flask
-from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 from api import api
@@ -14,6 +15,7 @@ db = SQLAlchemy(app)
 
 @app.route('/')
 def index():
+    """Index page."""
     return 'Agilus'
 
 
