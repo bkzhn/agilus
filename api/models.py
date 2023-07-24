@@ -1,11 +1,14 @@
 """Models."""
 
-from run import db
 from sqlalchemy import ForeignKey
+
+from api.application import db
 
 
 class User(db.Model):
     """User."""
+
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
@@ -22,6 +25,8 @@ class User(db.Model):
 class TicketType(db.Model):
     """TicketType."""
 
+    __tablename__ = 'ticket_types'
+
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
 
@@ -36,6 +41,8 @@ class TicketType(db.Model):
 
 class TicketStatus(db.Model):
     """TicketStatus."""
+
+    __tablename__ = 'ticket_statuses'
 
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
@@ -52,22 +59,24 @@ class TicketStatus(db.Model):
 class Ticket(db.Model):
     """Ticket."""
 
+    __tablename__ = 'tickets'
+
     id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    type_id = db.Column(db.Integer, ForeignKey('ticket_type.id'), nullable=False)
-    status_id = db.Column(db.Integer, ForeignKey('ticket_status.id'), nullable=False)
-    author = db.Column(db.Integer, ForeignKey('user.id'), nullable=False)
-    assignee = db.Column(db.Integer, ForeignKey('user.id'), nullable=True)
+    type_id = db.Column(db.Integer, ForeignKey('ticket_types.id'), nullable=False)
+    status_id = db.Column(db.Integer, ForeignKey('ticket_statuses.id'), nullable=False)
+    author_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
+    assignee_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=True)
 
-    def __init__(self, title, description, type_id, status_id, author, assignee=None):
+    def __init__(self, title, description, type_id, status_id, author_id, assignee_id=None):
         """Constructor."""
         self.title = title
         self.description = description
         self.type_id = type_id
         self.status_id = status_id
-        self.author = author
-        self.assignee = assignee
+        self.author_id = author_id
+        self.assignee_id = assignee_id
 
     def __repr__(self):
         """String representation."""
