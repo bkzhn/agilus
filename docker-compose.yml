@@ -2,7 +2,7 @@ version: '3'
 services:
   api:
     restart: always
-    build: ./api
+    build: ./app
     depends_on:
       - db
     expose:
