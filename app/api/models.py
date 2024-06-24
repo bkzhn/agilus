@@ -90,6 +90,6 @@ class Ticket(db.Model):
             'description': self.description,
             'type_id': self.type_id,
             'status_id': self.status_id,
-            'author': self.author,
-            'assignee': self.assignee
+            'author_id': self.author_id,
+            'assignee_id': self.assignee_id
         }
