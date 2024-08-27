@@ -12,7 +12,7 @@ services:
       - ./app:/app
 
   db:
-    image: mariadb:11.0.2
+    image: mariadb:11.5
     environment:
       MYSQL_ROOT_PASSWORD: agilus
       MYSQL_DATABASE: agilus
