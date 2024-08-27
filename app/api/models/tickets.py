@@ -5,23 +5,6 @@ from sqlalchemy import ForeignKey
 from api.application import db
 
 
-class User(db.Model):
-    """User."""
-
-    __tablename__ = 'users'
-
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
-
-    def __init__(self, name):
-        """Constructor."""
-        self.name = name
-
-    def __repr__(self):
-        """String representation."""
-        return '<User %r>' % self.name
-
-
 class TicketType(db.Model):
     """TicketType."""
 
@@ -37,6 +20,13 @@ class TicketType(db.Model):
     def __repr__(self):
         """String representation."""
         return '<TicketType %r>' % self.name
+
+    @property
+    def serialize(self):
+        """Dictionary representation."""
+        return {
+            'name': self.name,
+        }
 
 
 class TicketStatus(db.Model):
@@ -54,6 +44,13 @@ class TicketStatus(db.Model):
     def __repr__(self):
         """String representation."""
         return '<TicketStatus %r>' % self.name
+
+    @property
+    def serialize(self):
+        """Dictionary representation."""
+        return {
+            'name': self.name,
+        }
 
 
 class Ticket(db.Model):

@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
 
 from api.routes.tickets import tickets_api
+from api.routes.users import users_api
 
 
 db = SQLAlchemy()
@@ -13,6 +14,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('api.config.Config')
 
+    app.register_blueprint(users_api)
     app.register_blueprint(tickets_api)
 
     db.init_app(app)
