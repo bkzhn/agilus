@@ -1,17 +1,18 @@
 """Models."""
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Integer, String, Column, Text
 
-from api.application import db
+from api.models.base import BaseModel
+# from api.application import db
 
 
-class TicketType(db.Model):
+class TicketType(BaseModel):
     """TicketType."""
 
     __tablename__ = 'ticket_types'
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(100), nullable=False)
 
     def __init__(self, name):
         """Constructor."""
@@ -25,17 +26,18 @@ class TicketType(db.Model):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'name': self.name,
         }
 
 
-class TicketStatus(db.Model):
+class TicketStatus(BaseModel):
     """TicketStatus."""
 
     __tablename__ = 'ticket_statuses'
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(100), nullable=False)
 
     def __init__(self, name):
         """Constructor."""
@@ -49,22 +51,23 @@ class TicketStatus(db.Model):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'name': self.name,
         }
 
 
-class Ticket(db.Model):
+class Ticket(BaseModel):
     """Ticket."""
 
     __tablename__ = 'tickets'
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    type_id = db.Column(db.Integer, ForeignKey('ticket_types.id'), nullable=False)
-    status_id = db.Column(db.Integer, ForeignKey('ticket_statuses.id'), nullable=False)
-    author_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
-    assignee_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=True)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    title = Column(String(100), nullable=False)
+    description = Column(Text, nullable=False)
+    type_id = Column(Integer, ForeignKey('ticket_types.id'), nullable=False)
+    status_id = Column(Integer, ForeignKey('ticket_statuses.id'), nullable=False)
+    author_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    assignee_id = Column(Integer, ForeignKey('users.id'), nullable=True)
 
     def __init__(self, title, description, type_id, status_id, author_id, assignee_id=None):
         """Constructor."""
@@ -83,6 +86,7 @@ class Ticket(db.Model):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'title': self.title,
             'description': self.description,
             'type_id': self.type_id,
