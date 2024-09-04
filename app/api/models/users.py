@@ -26,5 +26,6 @@ class User(BaseModel):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'name': self.name,
         }

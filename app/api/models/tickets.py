@@ -26,6 +26,7 @@ class TicketType(BaseModel):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'name': self.name,
         }
 
@@ -50,6 +51,7 @@ class TicketStatus(BaseModel):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'name': self.name,
         }
 
@@ -84,6 +86,7 @@ class Ticket(BaseModel):
     def serialize(self):
         """Dictionary representation."""
         return {
+            'id': self.id,
             'title': self.title,
             'description': self.description,
             'type_id': self.type_id,
