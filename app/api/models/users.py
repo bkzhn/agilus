@@ -1,15 +1,18 @@
 """Models."""
 
-from api.application import db
+from sqlalchemy import Column, Integer, String
+
+from api.models.base import BaseModel
+# from api.application import db
 
 
-class User(db.Model):
+class User(BaseModel):
     """User."""
 
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
+    name = Column(String(100), nullable=False)
 
     def __init__(self, name):
         """Constructor."""
