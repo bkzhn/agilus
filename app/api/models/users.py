@@ -3,7 +3,6 @@
 from sqlalchemy import Column, Integer, String
 
 from api.models.base import BaseModel
-# from api.application import db
 
 
 class User(BaseModel):

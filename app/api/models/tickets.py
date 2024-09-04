@@ -3,7 +3,6 @@
 from sqlalchemy import ForeignKey, Integer, String, Column, Text
 
 from api.models.base import BaseModel
-# from api.application import db
 
 
 class TicketType(BaseModel):

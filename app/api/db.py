@@ -23,7 +23,6 @@ class Database:
         """Get SQLAlchemy session."""
         session: Session = self._scoped_session
         try:
-            #yield session
             return session
         except Exception:
             session.rollback()
