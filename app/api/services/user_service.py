@@ -10,7 +10,6 @@ class UserService(BaseService):
 
     def __init__(self, session: Session):
         self.session = session
-        print('BaseService initialized')
 
     def get_users(self):
         """Get list of users."""
@@ -19,7 +18,7 @@ class UserService(BaseService):
             return query.all()
 
     def get_user_by_id(self, id):
-        """Get list of users."""
+        """Get user by ID."""
         with self.session() as session:
             try:
                 return (
