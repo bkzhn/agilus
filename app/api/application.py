@@ -44,3 +44,9 @@ app = create_app(container)
 def index():
     """Index page."""
     return 'Agilus'
+
+
+@app.route('/healthcheck')
+def healthcheck():
+    """Healthcheck endpoint."""
+    return 'OK'
