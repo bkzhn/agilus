@@ -1,8 +1,10 @@
 """API."""
 
-from flask import jsonify
-from flask import Blueprint
-from flask import current_app as app
+from flask import (
+    jsonify,
+    Blueprint,
+    current_app as app,
+)
 
 users_api = Blueprint('users_api', __name__)
 
