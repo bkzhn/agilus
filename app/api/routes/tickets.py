@@ -44,7 +44,7 @@ def v1_create_ticket_type():
     if not name:
         raise Exception('Invalid name')
 
-    ticket_id = app.container.ticket_service.create_ticket_type(data.get('name'))
+    ticket_id = app.container.ticket_service.create_ticket_type(name)
     return jsonify({
         'ticket_id': ticket_id
     })
@@ -62,17 +62,41 @@ def v1_delete_ticket_type(id):
     """Action deletes ticket type by id."""
     is_deleted = app.container.ticket_service.delete_ticket_type_by_id(id)
     return jsonify({
-        'ticket_id': id,
+        'ticket_type_id': id,
         'is_deleted': is_deleted,
     })
 
 
-@tickets_api.route('/api/v1/ticket-statuses')
+@tickets_api.route('/api/v1/ticket-statuses', methods=['GET'])
 def v1_ticket_statuses():
     """Action returns list of ticket statuses."""
     ticket_statuses = app.container.ticket_service.get_ticket_statuses()
     return jsonify({
         'ticket_statuses': [i.serialize for i in ticket_statuses]
+    })
+
+
+@tickets_api.route('/api/v1/ticket-statuses', methods=['POST'])
+def v1_create_ticket_status():
+    """Action creates new ticket status."""
+    data = request.json
+    name = data.get('name')
+    if not name:
+        raise Exception('Invalid name')
+
+    ticket_status_id = app.container.ticket_service.create_ticket_status(name)
+    return jsonify({
+        'ticket_status_id': ticket_status_id
+    })
+
+
+@tickets_api.route('/api/v1/ticket-statuses/<id>', methods=['DELETE'])
+def v1_delete_ticket_status(id):
+    """Action deletes ticket status by ID."""
+    is_deleted = app.container.ticket_service.delete_ticket_status_by_id(id)
+    return jsonify({
+        'ticket_status_id': id,
+        'is_deleted': is_deleted,
     })
 
 
