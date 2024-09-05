@@ -54,6 +54,27 @@ class TicketService(BaseService):
             query = session.query(TicketType)
             return query.all()
 
+    def create_ticket_type(self, name):
+        """Create new ticket type."""
+        with self.session() as session:
+            ticket_type = TicketType(name=name)
+            session.add(ticket_type)
+            session.commit()
+            return ticket_type.id
+
+    def delete_ticket_type_by_id(self, id: int):
+        """Delete ticket type by ID."""
+        with self.session() as session:
+            is_deleted = (
+                session.query(TicketType)
+                .filter(
+                    TicketType.id == id,
+                )
+                .delete()
+            )
+            session.commit()
+            return bool(is_deleted)
+
     def get_ticket_type_by_id(self, id):
         """Get ticket type by ID."""
         with self.session() as session:
