@@ -12,13 +12,12 @@ services:
       - ./app:/app
 
   db:
-    image: mariadb:11.5
+    image: postgres:16.4
     environment:
-      MYSQL_ROOT_PASSWORD: agilus
-      MYSQL_DATABASE: agilus
-      MYSQL_USER: agilus
-      MYSQL_PASSWORD: agilus
+      POSTGRES_DB: agilus
+      POSTGRES_USER: agilus
+      POSTGRES_PASSWORD: agilus
     volumes:
       - ./schemas/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 3306:3306
+      - 5432:5432
