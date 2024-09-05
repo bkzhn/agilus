@@ -48,6 +48,27 @@ class TicketService(BaseService):
             except NoResultFound:
                 raise Exception('Ticket status does not exist')
 
+    def create_ticket_status(self, name):
+        """Create new ticket status."""
+        with self.session() as session:
+            ticket_status = TicketStatus(name=name)
+            session.add(ticket_status)
+            session.commit()
+            return ticket_status.id
+
+    def delete_ticket_status_by_id(self, id: int):
+        """Delete ticket status by ID."""
+        with self.session() as session:
+            is_deleted = (
+                session.query(TicketStatus)
+                .filter(
+                    TicketStatus.id == id,
+                )
+                .delete()
+            )
+            session.commit()
+            return bool(is_deleted)
+
     def get_ticket_types(self):
         """Get list of ticket types."""
         with self.session() as session:
