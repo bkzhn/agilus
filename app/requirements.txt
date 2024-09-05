@@ -9,7 +9,7 @@ Jinja2
 MarkupSafe
 nose
 packaging
-PyMySQL
+psycopg2-binary
 pyparsing
 six
 SQLAlchemy
