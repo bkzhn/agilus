@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, Integer, String
 
-from api.models.base import BaseModel
+from api.models.orm.base import BaseModel
 
 
 class User(BaseModel):
