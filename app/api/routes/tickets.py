@@ -7,6 +7,12 @@ from flask import (
     current_app as app,
 )
 
+from api.models.pydantic.tickets import (
+    CreateTicket,
+    CreateTicketType,
+    CreateTicketStatus,
+)
+
 tickets_api = Blueprint('tickets_api', __name__)
 
 
@@ -24,35 +30,10 @@ def v1_create_ticket():
     """Action creates new ticket."""
     data = request.json
 
-    title = data.get('title')
-    if not title:
-        raise Exception('Invalid title')
-
-    description = data.get('description')
-    if not description:
-        raise Exception('Invalid description')
-
-    type_id = data.get('type_id')
-    if not type_id:
-        raise Exception('Invalid type id')
-
-    status_id = data.get('status_id')
-    if not status_id:
-        raise Exception('Invalid status id')
-
-    author_id = data.get('author_id')
-    if not author_id:
-        raise Exception('Invalid author id')
-
-    assignee_id = data.get('assignee_id')
+    ticket_data = CreateTicket(**data)
 
     ticket_id = app.container.ticket_service.create_ticket(
-        title=title,
-        description=description,
-        type_id=type_id,
-        status_id=status_id,
-        author_id=author_id,
-        assignee_id=assignee_id,
+        data=ticket_data,
     )
     return jsonify({
         'ticket_id': ticket_id
@@ -89,13 +70,12 @@ def v1_ticket_types():
 def v1_create_ticket_type():
     """Action creates new ticket type."""
     data = request.json
-    name = data.get('name')
-    if not name:
-        raise Exception('Invalid name')
 
-    ticket_id = app.container.ticket_service.create_ticket_type(name)
+    ticket_type_data = CreateTicketType(**data)
+
+    ticket_type_id = app.container.ticket_service.create_ticket_type(data=ticket_type_data)
     return jsonify({
-        'ticket_id': ticket_id
+        'ticket_type_id': ticket_type_id
     })
 
 
@@ -129,11 +109,9 @@ def v1_ticket_statuses():
 def v1_create_ticket_status():
     """Action creates new ticket status."""
     data = request.json
-    name = data.get('name')
-    if not name:
-        raise Exception('Invalid name')
+    ticket_status_data = CreateTicketStatus(**data)
 
-    ticket_status_id = app.container.ticket_service.create_ticket_status(name)
+    ticket_status_id = app.container.ticket_service.create_ticket_status(data=ticket_status_data)
     return jsonify({
         'ticket_status_id': ticket_status_id
     })
