@@ -11,6 +11,7 @@ nose
 packaging
 psycopg2-binary
 pyparsing
+python-dotenv
 six
 SQLAlchemy
 typing_extensions
