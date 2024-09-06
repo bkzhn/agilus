@@ -16,3 +16,4 @@ six
 SQLAlchemy
 typing_extensions
 Werkzeug
+pydantic
