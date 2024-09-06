@@ -10,7 +10,7 @@ from flask import (
 tickets_api = Blueprint('tickets_api', __name__)
 
 
-@tickets_api.route('/api/v1/tickets', methods=['GET'])
+@tickets_api.route('/tickets', methods=['GET'])
 def v1_tickets():
     """Action returns list of tickets."""
     tickets = app.container.ticket_service.get_tickets()
@@ -19,7 +19,7 @@ def v1_tickets():
     })
 
 
-@tickets_api.route('/api/v1/tickets', methods=['POST'])
+@tickets_api.route('/tickets', methods=['POST'])
 def v1_create_ticket():
     """Action creates new ticket."""
     data = request.json
@@ -59,14 +59,14 @@ def v1_create_ticket():
     })
 
 
-@tickets_api.route('/api/v1/tickets/<id>', methods=['GET'])
+@tickets_api.route('/tickets/<id>', methods=['GET'])
 def v1_ticket(id):
     """Action returns a ticket by id."""
     ticket = app.container.ticket_service.get_ticket_by_id(id)
     return jsonify(ticket.serialize)
 
 
-@tickets_api.route('/api/v1/tickets/<id>', methods=['DELETE'])
+@tickets_api.route('/tickets/<id>', methods=['DELETE'])
 def v1_delete_ticket(id):
     """Action deletes ticket by ID."""
     is_deleted = app.container.ticket_service.delete_ticket_by_id(id)
@@ -76,7 +76,7 @@ def v1_delete_ticket(id):
     })
 
 
-@tickets_api.route('/api/v1/ticket-types', methods=['GET'])
+@tickets_api.route('/ticket-types', methods=['GET'])
 def v1_ticket_types():
     """Action returns list of ticket types."""
     ticket_types = app.container.ticket_service.get_ticket_types()
@@ -85,7 +85,7 @@ def v1_ticket_types():
     })
 
 
-@tickets_api.route('/api/v1/ticket-types', methods=['POST'])
+@tickets_api.route('/ticket-types', methods=['POST'])
 def v1_create_ticket_type():
     """Action creates new ticket type."""
     data = request.json
@@ -99,14 +99,14 @@ def v1_create_ticket_type():
     })
 
 
-@tickets_api.route('/api/v1/ticket-types/<id>', methods=['GET'])
+@tickets_api.route('/ticket-types/<id>', methods=['GET'])
 def v1_ticket_type(id):
     """Action returns a ticket type by id."""
     ticket_type = app.container.ticket_service.get_ticket_type_by_id(id)
     return jsonify(ticket_type.serialize)
 
 
-@tickets_api.route('/api/v1/ticket-types/<id>', methods=['DELETE'])
+@tickets_api.route('/ticket-types/<id>', methods=['DELETE'])
 def v1_delete_ticket_type(id):
     """Action deletes ticket type by id."""
     is_deleted = app.container.ticket_service.delete_ticket_type_by_id(id)
@@ -116,7 +116,7 @@ def v1_delete_ticket_type(id):
     })
 
 
-@tickets_api.route('/api/v1/ticket-statuses', methods=['GET'])
+@tickets_api.route('/ticket-statuses', methods=['GET'])
 def v1_ticket_statuses():
     """Action returns list of ticket statuses."""
     ticket_statuses = app.container.ticket_service.get_ticket_statuses()
@@ -125,7 +125,7 @@ def v1_ticket_statuses():
     })
 
 
-@tickets_api.route('/api/v1/ticket-statuses', methods=['POST'])
+@tickets_api.route('/ticket-statuses', methods=['POST'])
 def v1_create_ticket_status():
     """Action creates new ticket status."""
     data = request.json
@@ -139,14 +139,14 @@ def v1_create_ticket_status():
     })
 
 
-@tickets_api.route('/api/v1/ticket-statuses/<id>', methods=['GET'])
+@tickets_api.route('/ticket-statuses/<id>', methods=['GET'])
 def v1_ticket_status(id):
     """Action returns a ticket status by id."""
     ticket_status = app.container.ticket_service.get_ticket_status_by_id(id)
     return jsonify(ticket_status.serialize)
 
 
-@tickets_api.route('/api/v1/ticket-statuses/<id>', methods=['DELETE'])
+@tickets_api.route('/ticket-statuses/<id>', methods=['DELETE'])
 def v1_delete_ticket_status(id):
     """Action deletes ticket status by ID."""
     is_deleted = app.container.ticket_service.delete_ticket_status_by_id(id)

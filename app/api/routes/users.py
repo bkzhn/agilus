@@ -9,7 +9,7 @@ from flask import (
 users_api = Blueprint('users_api', __name__)
 
 
-@users_api.route('/api/v1/users')
+@users_api.route('/users')
 def v1_users():
     """Action returns list of users."""
     users = app.container.user_service.get_users()
@@ -18,7 +18,7 @@ def v1_users():
     })
 
 
-@users_api.route('/api/v1/users/<id>')
+@users_api.route('/users/<id>')
 def v1_user(id):
     """Action returns a user by id."""
     user = app.container.user_service.get_user_by_id(id)

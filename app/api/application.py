@@ -3,8 +3,7 @@
 from flask import Flask
 
 from api.container import Container
-from api.routes.tickets import tickets_api
-from api.routes.users import users_api
+from api.routes.v1 import v1_api
 
 
 
@@ -20,8 +19,7 @@ def create_app(container: Container):
     app.container = container
     app.config.from_object('api.config.Config')
 
-    app.register_blueprint(users_api)
-    app.register_blueprint(tickets_api)
+    app.register_blueprint(v1_api)
 
     return app
 
