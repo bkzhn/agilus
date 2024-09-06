@@ -1,7 +1,7 @@
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import Session
 
-from api.models.users import User
+from api.models.orm.users import User
 from api.services.base_service import BaseService
 
 

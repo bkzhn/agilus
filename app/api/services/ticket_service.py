@@ -2,7 +2,8 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import Session
 
 
-from api.models.tickets import Ticket, TicketStatus, TicketType
+from api.models.orm.tickets import Ticket, TicketStatus, TicketType
+from api.models.pydantic.tickets import CreateTicket, CreateTicketType, CreateTicketStatus
 from api.services.base_service import BaseService
 
 
@@ -30,27 +31,20 @@ class TicketService(BaseService):
             except NoResultFound:
                 raise Exception('Ticket does not exist')
 
-    def create_ticket(
-        self,
-        title,
-        description,
-        type_id,
-        status_id,
-        author_id,
-        assignee_id,
-    ):
+    def create_ticket(self, data: CreateTicket):
         """Create new ticket."""
         with self.session() as session:
             ticket = Ticket(
-                title=title,
-                description=description,
-                type_id=type_id,
-                status_id=status_id,
-                author_id=author_id,
-                assignee_id=assignee_id,
+                title=data.title,
+                description=data.description,
+                type_id=data.type_id,
+                status_id=data.status_id,
+                author_id=data.author_id,
+                assignee_id=data.assignee_id,
             )
             session.add(ticket)
             session.commit()
+
 
     def delete_ticket_by_id(self, id):
         """Delete ticket by ID."""
@@ -83,10 +77,10 @@ class TicketService(BaseService):
             except NoResultFound:
                 raise Exception('Ticket status does not exist')
 
-    def create_ticket_status(self, name):
+    def create_ticket_status(self, data: CreateTicketStatus):
         """Create new ticket status."""
         with self.session() as session:
-            ticket_status = TicketStatus(name=name)
+            ticket_status = TicketStatus(name=data.name)
             session.add(ticket_status)
             session.commit()
             return ticket_status.id
@@ -110,10 +104,10 @@ class TicketService(BaseService):
             query = session.query(TicketType)
             return query.all()
 
-    def create_ticket_type(self, name):
+    def create_ticket_type(self, data: CreateTicketType):
         """Create new ticket type."""
         with self.session() as session:
-            ticket_type = TicketType(name=name)
+            ticket_type = TicketType(name=data.name)
             session.add(ticket_type)
             session.commit()
             return ticket_type.id
