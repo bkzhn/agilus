@@ -7,7 +7,7 @@ services:
     expose:
       - 5000
     environment:
-      DATABASE_URI: postgresql://agilus:agilus@localhost:5432/agilus
+      DATABASE_URI: postgresql://agilus:agilus@db:5432/agilus
     ports:
       - 5000:5000
     volumes:
